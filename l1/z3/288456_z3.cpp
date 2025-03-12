@@ -9,9 +9,11 @@ int main()
     cin >> n;
     for (int i = 1; i <= n; i++)
     {
-        if(i%5==0)
+        int ii = i;
+        while(ii%5==0)
         {
             count5 = count5+1;
+            ii=ii/5;
         }
     }
     cout << count5;
