@@ -1,84 +1,41 @@
 #include <iostream>
-#include <string>
+#include <vector>
 using namespace std;
 
-class Pojazd {
-    protected:
-        string marka;
-        string model;
-        int rok_produkcji;
-    public:
-        void ustaw(string ma, string mo, int ro)
-        {
-          marka = ma;
-          model = mo;
-          rok_produkcji = ro;
-        }
-        void wyswietl()
-        {
-            cout << "marka " << marka << ", model " << model << ", rok produkcji "<< rok_produkcji << "\n";
-        }
-};
+int n;
+vector<int> rara;
 
-class Samochod {
-  private:
-    int liczba_drzwi;
-  public:
-    void ustaw(int li)
-        {
-          liczba_drzwi = li;
-        }
-    void wyswietl() 
-    {
-    cout << "liczba drzwi " << liczba_drzwi << "\n";
-    }
-};
 
-class Rower {
-  public:
-    int liczba_przerzutek;
-        void ustaw(int li)
-        {
-          liczba_przerzutek = li;
-        }
-    void wyswietl() 
-    {
-    cout << "liczba przerzutek " << liczba_przerzutek << "\n";
-    }
-};
-
-class Everything : public Rower, public Samochod, public Pojazd
+vector<int> sort(vector<int> lista, int size)
 {
-    public:
-    void ustaw(string ma, string mo, int ro, int li, int pr)
+    bool swapping = true;
+    while(swapping)
+    {
+        swapping = false;
+        int i = 1;
+        while(i < size)
         {
-          Pojazd::ustaw(ma,mo,ro);
-          Samochod::ustaw(li);
-          Rower::ustaw(pr);
+            if (lista[i - 1] > lista[i]) 
+            {
+                swap(lista[i - 1], lista[i]);
+                swapping = true;
+            }
+            i = i + 1;
         }
-    void wyswietl() 
-    {
-      Pojazd::wyswietl();
-      Samochod::wyswietl();
-      Rower::wyswietl();
     }
+    return lista;
+}
 
-};
-
-int main(){
-string mark;
-string model;
-int n[3];
-cin >> mark;
-cin >> model;
-    for (int i = 0; i<3;i++)
+int main() 
+{
+    cin >> n;
+    int d;
+    for (int i = 0; i<n;i++)
     {
-        cin >> n[i];
+        cin >> d;
+        rara.push_back(d);
     }
-
-    Everything auto1;
-    auto1.ustaw(mark,model,n[0],n[1],n[2]);
-    auto1.wyswietl();
-
-    return 0;
+    rara = sort(rara, n);
+    for (auto v : rara)
+        cout << v << "\n";
 }
